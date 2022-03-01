@@ -47,7 +47,6 @@ const Section = ({children, title}): Node => {
             color: isDarkMode ? Colors.light : Colors.dark,
           },
         ]}>
-      hghg
       </Text>
     </View>
   );
@@ -72,7 +71,6 @@ const App: () => Node = () => {
             uri: 'https://reactnative.dev/img/tiny_logo.png',
           }}
       />
-
     </SafeAreaView>
   );
 };
