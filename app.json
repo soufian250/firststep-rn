@@ -1,4 +1,5 @@
 {
   "name": "FirstStep",
-  "displayName": "FirstStep"
+  "displayName": "FirstStep",
+  "orientation": "default"
 }

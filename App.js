@@ -16,7 +16,7 @@ import {
   Text,
   Button,
   useColorScheme,
-  View, TextInput, Image,
+  View, TextInput, Image, TouchableHighlight,Platform,Alert,Dimensions
 } from 'react-native';
 
 import {
@@ -27,75 +27,44 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-      </Text>
-    </View>
-  );
-};
+import {useDimensions} from "@react-native-community/hooks";
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
-
+console.log(useDimensions())
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+      paddingTop: Platform.OS === "android"?StatusBar.currentHeight:0
   };
 
-  const onPressLearnMore = (e)=>{
-     console.log(e)
+  const handlePress  = () =>{
+    Alert.alert('Are you sure that you want exit?',"Don't forget to rate us in Play Store",[
+      {text: 'Yes', onPress: ()=>alert(4)},
+      {text: 'No'}
+    ])
   }
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <Image
-          style={styles.tinyLogo}
-          source={{
-            uri: 'https://reactnative.dev/img/tiny_logo.png',
-          }}
-      />
+      <View style={{
+        backgroundColor: 'orange',
+        width: '100%',
+        height: '30%'
+      }}/>
+
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  tinyLogo: {
-    width: 50,
-    height: 50,
-  },
+    imageStyle:{
+        width: 50,
+        height: 50,
+    }
 });
+
+// npx react-native run-android
+//rm ~/.android/avd/Pixel_3a_API_30_x86.avd/*.loc
+//adb devices
 
 export default App;
